@@ -19,11 +19,15 @@ import br.com.alura.loja.modelo.Projeto;
 public class ProjetoTest {
 	
 	private HttpServer server;
+	private Client client;
+	private WebTarget target;
 	
 	@Before
 	public void startServidor() {
 		
 		this.server = Servidor.iniciarServidor();
+		this.client = ClientBuilder.newClient();
+		this.target = client.target("http://localhost:8080");
 		
 	}
 	
@@ -36,8 +40,6 @@ public class ProjetoTest {
 		
 	@Test
 	public void testProjeto() {
-		Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://localhost:8080");
 		String conteudo =  target.path("/projetos/1").request().get(String.class);
 		Projeto projeto = (Projeto) new XStream().fromXML(conteudo);
 		Assert.assertEquals("Alura", projeto.getNome());

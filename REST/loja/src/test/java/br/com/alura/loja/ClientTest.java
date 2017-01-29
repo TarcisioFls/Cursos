@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
 import junit.framework.Assert;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +25,16 @@ import com.thoughtworks.xstream.XStream;
 public class ClientTest {
 	
 	private HttpServer server;
+	private Client client;
+	private WebTarget target;
 	
 	@Before
 	public void startServidor(){
 		this.server = Servidor.iniciarServidor();
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(new LoggingFilter());
+		this.client = ClientBuilder.newClient(clientConfig);
+		this.target = client.target("http://localhost:8080");
 	}
 	
 	@After
@@ -36,8 +44,6 @@ public class ClientTest {
 	
 	@Test
 	public void testaQueAConexaoComOServidorFunciona() {
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
 		String conteudo = target.path("/carrinhos/1").request().get(String.class);
 		Carrinho carrinho = (Carrinho) new XStream().fromXML(conteudo);
 		Assert.assertEquals("Rua Vergueiro 3185, 8 andar", carrinho.getRua());
@@ -45,8 +51,6 @@ public class ClientTest {
 	
 	@Test
 	public void testeCadastro() {
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:8080");
 		Carrinho carrinho = new Carrinho();
         carrinho.adiciona(new Produto(314L, "Celular", 222, 1));
         carrinho.setRua("Lororor");
