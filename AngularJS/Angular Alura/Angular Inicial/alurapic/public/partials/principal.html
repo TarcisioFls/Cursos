@@ -5,6 +5,10 @@
 <div class="row">
   <div class="col-md-12">
       
+      <p class="alert alert-info" ng-show="mensagem.length">
+        {{mensagem}}
+      </p>
+      
     <form>
         
         <div class="input-group">
@@ -27,5 +31,11 @@
 <div class="row">
     <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: {titulo: filtro}" titulo={{foto.titulo}}>
         <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
+        <a class="btn btn-primary btn-block" href="/fotos/edit/{{foto._id}}">
+            Editar
+        </a>
+        <button class="btn btn-danger btn-block" ng-click="remover(foto)">
+            Remover
+        </button>
     </meu-painel><!-- fim -->
 </div>
