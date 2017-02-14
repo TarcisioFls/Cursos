@@ -16,8 +16,7 @@ angular.module('alurapic').controller('FotoController', function($scope, $http, 
         
         if ($scope.formulario.$valid) {
             if ($routeParams.fotoId) {
-                $http.put('v1/fotos/' + $routeParams.fotoId, $scope.foto).success(function(foto) {
-                    $scope.foto = foto;
+                $http.put('v1/fotos/' + $routeParams.fotoId, $scope.foto).success(function() {
                     $scope.mensagem = 'Imagem alterada com sucesso!';
                 }).error(function(erro) {
                     console.log(erro);
@@ -30,7 +29,7 @@ angular.module('alurapic').controller('FotoController', function($scope, $http, 
 
                     $scope.foto = {};
                     $scope.mensagem = 'Imagem Cadastrada com Sucesso!';
-
+                    $scope.formulario.$submitted = false;
                 }).error(function() {
                     $scope.mensagem = 'Imagem não cadastrada, por favor tente mais tarde!';
                 });
