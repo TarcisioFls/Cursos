@@ -28,8 +28,8 @@ angular.module('alurapic').controller('FotoController', function($scope, $http, 
                 $http.post('v1/fotos', $scope.foto).success(function() {
 
                     $scope.foto = {};
+                    $scope.formulario.$setPristine();
                     $scope.mensagem = 'Imagem Cadastrada com Sucesso!';
-                    $scope.formulario.$submitted = false;
                 }).error(function() {
                     $scope.mensagem = 'Imagem não cadastrada, por favor tente mais tarde!';
                 });
