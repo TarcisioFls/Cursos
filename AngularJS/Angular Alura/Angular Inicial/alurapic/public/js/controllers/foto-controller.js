@@ -1,38 +1,58 @@
-angular.module('alurapic').controller('FotoController', function($scope, $http, $routeParams) {
+angular.module('alurapic').controller('FotoController', function($scope, recursoFoto, $routeParams) {
     
     $scope.foto = {};
     
     $scope.mensagem = '';
     
     if ($routeParams.fotoId) {
-        $http.get('v1/fotos/' + $routeParams.fotoId).success(function(foto) {
-            $scope.foto = foto;
-        }).error(function(erro) {
+        recursoFoto.get({fotoId: $routeParams.fotoId}, function(foto) {
+           $scope.foto = foto; 
+        }, function(erro) {
             console.log(erro);
         });
+        
+//        $http.get('v1/fotos/' + $routeParams.fotoId).success(function(foto) {
+//            $scope.foto = foto;
+//        }).error(function(erro) {
+//            console.log(erro);
+//        });
     }
     
     $scope.subimeter = function () {
         
         if ($scope.formulario.$valid) {
             if ($routeParams.fotoId) {
-                $http.put('v1/fotos/' + $routeParams.fotoId, $scope.foto).success(function() {
-                    $scope.mensagem = 'Imagem alterada com sucesso!';
-                }).error(function(erro) {
+                recursoFoto.update({fotoId: $scope.foto._id}, $scope.foto, function() {
+                   $scope.mensagem = 'Imagem alterada com sucesso!';
+                }, function(erro) {
                     console.log(erro);
                     $scope.mensagem = 'Imagem não alerada, por favor tente mais tarde!';
                 });
                 
+//                $http.put('v1/fotos/' + $routeParams.fotoId, $scope.foto).success(function() {
+//                    $scope.mensagem = 'Imagem alterada com sucesso!';
+//                }).error(function(erro) {
+//                    console.log(erro);
+//                    $scope.mensagem = 'Imagem não alerada, por favor tente mais tarde!';
+//                });
+                
             } else {
                 
-                $http.post('v1/fotos', $scope.foto).success(function() {
-
+                recursoFoto.save($scope.foto, function(){
                     $scope.foto = {};
-                    $scope.formulario.$setPristine();
                     $scope.mensagem = 'Imagem Cadastrada com Sucesso!';
-                }).error(function() {
+                }, function(erro) {
                     $scope.mensagem = 'Imagem não cadastrada, por favor tente mais tarde!';
                 });
+                
+//                $http.post('v1/fotos', $scope.foto).success(function() {
+//
+//                    $scope.foto = {};
+//                    $scope.formulario.$setPristine();
+//                    $scope.mensagem = 'Imagem Cadastrada com Sucesso!';
+//                }).error(function() {
+//                    $scope.mensagem = 'Imagem não cadastrada, por favor tente mais tarde!';
+//                });
                 
             }
         }
