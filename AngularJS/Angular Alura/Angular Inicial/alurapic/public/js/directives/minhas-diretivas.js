@@ -1,4 +1,4 @@
-angular.module('minhasDiretivas', []).directive('meuPainel', function () {
+angular.module('minhasDiretivas', ['meusServicos']).directive('meuPainel', function () {
 
     var ddo = {};
 
@@ -38,7 +38,9 @@ angular.module('minhasDiretivas', []).directive('meuPainel', function () {
     };
     
     ddo.template = '<button class="btn btn-danger btn-block" ng-click="acao()">{{nome}}</button>';
+    
     return ddo;
+    
 }).directive('meuFocus', function() {
    
     var ddo = {};
@@ -50,4 +52,20 @@ angular.module('minhasDiretivas', []).directive('meuPainel', function () {
       });
     };
     return ddo;
+    
+}).directive('meusTitulos', function () {
+    
+    var ddo = {};
+    ddo.restric = 'E';
+    ddo.template = '<ul><li ng-repeat="titulo in titulos">{{titulo}}</li></ul>';
+    ddo.controller = function($scope, recursoFoto) {
+        recursoFoto.query(function(fotos) {
+            $scope.titulo = fotos.map(function(foto) {
+                return foto.titulo;
+            });
+        });
+    };
+    
+    return ddo;
+    
 });
