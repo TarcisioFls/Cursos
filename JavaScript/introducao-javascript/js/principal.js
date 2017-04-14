@@ -1,4 +1,4 @@
-var titulo = document.querySelector(".titulo");
+    var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
 //var peso = document.querySelector("#primeiro").querySelector(".info-peso").textContent;
@@ -37,3 +37,34 @@ for (var i = 0; i < pacientes.length; i++) {
         pacientes[i].querySelector(".info-imc").textContent = imc.toFixed(2);
     }
 }
+
+var botaoAdicionar = document.querySelector("#adicionar-paciente").addEventListener("click", function(e) {
+    e.preventDefault();
+    var form = document.querySelector("#form-adiciona");
+    
+    var nome = form.nome.value;
+    var peso = form.peso.value;
+    var gordura = form.gordura.value;
+    var altura = form.altura.value;
+    
+    var tr = document.createElement("tr");
+    
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
+    
+    nomeTd.textContent = nome;
+    pesoTd.textContent = peso;
+    alturaTd.textContent = altura;
+    gorduraTd.textContent = gordura;
+    
+    tr.appendChild(nomeTd);
+    tr.appendChild(pesoTd);
+    tr.appendChild(alturaTd);
+    tr.appendChild(gorduraTd);
+    
+    var tabela = document.querySelector("#tabela-pacientes").appendChild(tr);
+    
+});
