@@ -13,3 +13,15 @@ campo.on("input", function() {
     $("#contador-palavras").text(qtdPalavras);
     
 });
+
+var tempoRestante = $("#tempo").text();
+campo.one("focus", function() {
+    var idTempo = setInterval(function(){
+        tempoRestante--;
+        $("#tempo").text(tempoRestante);
+        if (tempoRestante < 1) {
+            campo.attr("disabled", true);
+            clearInterval(idTempo);
+        }
+    }, 1000);
+});
