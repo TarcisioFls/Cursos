@@ -3,23 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Alura Typer</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css">
+    <link rel="stylesheet" href="css/libs/google-fonts.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <p class="frase">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    <ul>
-        <li><span id="quant"></span> Palavras</li>
-        <li><span id="tempo">3</span> Segundos</li>
-    </ul>
     
-    <textarea class="campo-digitacao" rows="8" cols="40"></textarea>
-    
-    <button id="botao-reiniciar" disabled>Reiniciar Jogo</button>
-    
-    <ul>
-        <li><span id="contador-caracteres">0</span> Caracteres</li>
-        <li><span id="contador-palavras">0</span> Palavras</li>
-    </ul>
-    
+    <div class="container">
+        <h1 class="center">Alura Typer</h1>
+        <p class="frase center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <ul class="center">
+            <li>
+                <i class="small material-icons icones">description</i>
+                <span id="quant"></span> Palavras
+            </li>
+            <li>
+                <i class="small material-icons icones">query_builder</i>
+                <span id="tempo">10</span> Segundos
+            </li>
+        </ul>
+
+        <textarea class="campo-digitacao" rows="8" cols="40"></textarea>
+        
+        <div class="botoes">
+            <a id="botao-reiniciar" class="btn-floating btn-large waves-effect waves-light red disabled">
+                <i class="material-icons">restore</i>
+            </a>
+        </div>
+
+        <ul class="center">
+            <li><span id="contador-caracteres">0</span> Caracteres</li>
+            <li><span id="contador-palavras">0</span> Palavras</li>
+        </ul>
+    </div>    
     <script src="js/jquery.js"></script>
     <script src="js/main.js"></script>
 </body>
