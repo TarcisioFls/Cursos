@@ -1,18 +1,19 @@
 var campo = $(".campo-digitacao");
-var frase = $(".frase").text();
-var quantFrase = frase.split(" ").length;
 var tempoInicial = $("#tempo").text();
-var tempoRestante = tempoInicial;
 var disabled = $("#botao-reiniciar").hasClass("disabled");
 
 $(function() {
     inicializarContadores();
     inicializaContatorTempo();
     verificandoTextoDigitado();
+    atualizaTamanhoFrase();
 });
 
-
-$("#quant").text(quantFrase);
+function atualizaTamanhoFrase() {
+    var frase = $(".frase").text();
+    var quantFrase = frase.split(" ").length;
+    $("#quant").text(quantFrase);
+}
 
 function inicializarContadores() {
     campo.on("input", function() {
@@ -28,6 +29,7 @@ function inicializarContadores() {
 
 function inicializaContatorTempo() {
     campo.one("focus", function() {
+        var tempoRestante = tempoInicial;
         idTempo = setInterval(function(){
             if (tempoRestante <= tempoInicial && tempoRestante > 0) {
                 tempoRestante--;
@@ -67,6 +69,7 @@ function reiniciarJogo() {
 function verificandoTextoDigitado() {
     campo.on("input", function() {
         var campoDigitado = campo.val();
+        var frase = $(".frase").text();
         var textoComprado = frase.substr(0, campoDigitado.length);
         if (textoComprado == campoDigitado) {
             campo.addClass("borda-correta");
@@ -76,4 +79,9 @@ function verificandoTextoDigitado() {
             campo.removeClass("borda-correta");
         } 
     });
+}
+
+function atualizaTempoInicial(tempo) {
+    tempoInicial = tempo;
+    $("#tempo").text(tempoInicial);
 }
