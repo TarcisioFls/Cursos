@@ -28,3 +28,11 @@
 .borda-correta {
     border: 3px solid green;
 }
+
+.placar {
+	display: none;
+}
+
+body {
+    overflow: scroll;
+}

@@ -1,3 +1,5 @@
+$("#botao-placar").click(exbirTabela);
+
 function inseriNoPlacar(nome) {
     var tbody = $(".placar").find("tbody");
     var quantPalavras = $("#contador-palavras").text();
@@ -7,6 +9,8 @@ function inseriNoPlacar(nome) {
     
     tbody.prepend(linha);
     
+    $(".placar").stop().slideDown(1000);
+    scrollTabela();
 }
 
 function criarLinha(nome, palavra) {
@@ -31,6 +35,20 @@ function inserirNome() {
 
 function removerLinha(e) {
     e.preventDefault();
-    console.log("oi");
-    $(this).parent().parent().remove();
+    
+    $(this).parent().parent().fadeOut(800, function() {
+        $(this).remove();
+    });
 } 
+
+function exbirTabela() {
+    $(".placar").stop().slideToggle(1000);
+    scrollTabela();
+}
+
+function scrollTabela() {
+    var posicaoPlacar = $(".placar").offset().top;
+    $("body").animate({
+        scrollTop: posicaoPlacar + "px"
+    }, 1000);
+}
