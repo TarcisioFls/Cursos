@@ -28,20 +28,25 @@ function inicializarContadores() {
 
 function inicializaContatorTempo() {
     campo.one("focus", function() {
-    idTempo = setInterval(function(){
-        if (tempoRestante <= tempoInicial && tempoRestante > 0) {
-            tempoRestante--;
-        }
-        $("#tempo").text(tempoRestante);
-        if (tempoRestante < 1) {
-            campo.attr("disabled", true);
-            clearInterval(idTempo);
-            $("#botao-reiniciar").removeClass("disabled");
-            campo.addClass("campo-desativado");
-            $("#botao-reiniciar").click(reiniciarJogo);
-        }
-    }, 1000);
-});
+        idTempo = setInterval(function(){
+            if (tempoRestante <= tempoInicial && tempoRestante > 0) {
+                tempoRestante--;
+            }
+            $("#tempo").text(tempoRestante);
+            if (tempoRestante < 1) {
+                clearInterval(idTempo);
+                finalizaJogo();
+            }
+        }, 1000);
+    });
+}
+
+function finalizaJogo() {
+    campo.attr("disabled", true);
+    $("#botao-reiniciar").removeClass("disabled");
+    campo.addClass("campo-desativado");
+    $("#botao-reiniciar").click(reiniciarJogo);
+    inserirNome();
 }
 
 function reiniciarJogo() {
