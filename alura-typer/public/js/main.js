@@ -7,6 +7,7 @@ $(function() {
     inicializaContatorTempo();
     verificandoTextoDigitado();
     atualizaTamanhoFrase();
+    atualizarPlacar();
 });
 
 function atualizaTamanhoFrase() {

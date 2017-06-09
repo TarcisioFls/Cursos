@@ -49,3 +49,7 @@ body {
 #frase-id {
 	width: 40px;
 }
+
+#botao-sincronizacao {
+    float: right
+}
