@@ -8,6 +8,13 @@ $(function() {
     verificandoTextoDigitado();
     atualizaTamanhoFrase();
     atualizarPlacar();
+    $("#usuarios").selectize({
+        create: true,
+        sortField: 'text'
+    });
+    $(".tooltip").tooltipster({
+        trigger: "custom"
+    });
 });
 
 function atualizaTamanhoFrase() {
@@ -45,11 +52,12 @@ function inicializaContatorTempo() {
 }
 
 function finalizaJogo() {
+    var usuario = $("#usuarios").val();
     campo.attr("disabled", true);
     $("#botao-reiniciar").removeClass("disabled");
     campo.addClass("campo-desativado");
     $("#botao-reiniciar").click(reiniciarJogo);
-    inserirNome();
+    inseriNoPlacar(usuario);
 }
 
 function reiniciarJogo() {

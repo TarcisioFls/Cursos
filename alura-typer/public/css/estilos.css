@@ -53,3 +53,16 @@ body {
 #botao-sincronizacao {
     float: right
 }
+
+.select-usuarios {
+    display: inline-block;
+}
+
+#usuarios {
+	display: block;
+}
+
+.selectize-input {
+    width: auto;
+    vertical-align: middle;
+}
